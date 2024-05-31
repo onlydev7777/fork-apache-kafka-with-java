@@ -1,12 +1,10 @@
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group 'com.example'
 version '1.0'
-
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -17,8 +15,8 @@ dependencies {
     implementation 'org.slf4j:slf4j-simple:1.7.30'
 }
 
-jar {
-    from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    }
+tasks.named('shadowJar') {
+    archiveBaseName.set('simple-source-connector-jar')
+    archiveVersion.set('1.0.0')
+    archiveClassifier.set('')
 }
